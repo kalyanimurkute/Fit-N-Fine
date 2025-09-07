@@ -57,7 +57,7 @@ ul.nav-links li a:hover {
 
 .button {
   display: inline-block;
-  margin-right: 65px;
+  margin-left: 20px;
   padding: 10px 20px;
   background-color: #fff;
   color: #4c346b;
@@ -197,7 +197,7 @@ ul.nav-links li a:hover {
 
 /* Hero Section */
 .hero {
-   margin: 0;
+  margin: 0;
   padding: 0;
   background-image: url("../images/healthy-1.jpg");
   /* Replace with your image */
