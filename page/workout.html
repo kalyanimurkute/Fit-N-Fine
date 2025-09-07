@@ -9,23 +9,41 @@
 </head>
 
 <body>
-<!--navigation bar-->
-<div class="hero-section">
-    <nav>
-      <div class="logo">
-        <img src="../images/anytime-fitness-logo.png" alt="logo-img">
-      </div>
-      <ul class="nav-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../page/workout.html">Workout</a></li>
-        <li><a href="../page/plan.html">Plan</a></li>
-        <li><a href="../page/healthy.html">Healthy Living</a></li>
-        <li><a href="../page/trainer.html">Personal Trainer</a></li>
-         <li><a href="../page/nutrition.html">Nutrition</a></li>
-      </ul>
-      <a href="#" class="btn-2">Try Us For Free</a>
-    </nav>
- </div>
+<!-- Navigation -->
+<nav>
+  <div class="logo">
+    <img src="./../images/anytime-fitness-logo.png" alt="logo-img">
+  </div>
+
+  <!-- Hamburger (visible only on mobile) -->
+  <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">☰</button>
+
+  <!-- Desktop Nav -->
+  <ul class="nav-links">
+    <li><a href="./../index.html">Home</a></li>
+    <li><a href="./../page/workout.html">Workout</a></li>
+    <li><a href="./../page/plan.html">Plan</a></li>
+    <li><a href="./../page/healthy.html">Healthy Living</a></li>
+    <li><a href="./../page/trainer.html">Personal Trainer</a></li>
+    <li><a href="./../page/nutrition.html">Nutrition</a></li>
+  </ul>
+
+  <a href="#" class="button">Try Us For Free</a>
+</nav>
+
+<!-- Mobile Sidebar -->
+<div class="sidebar" id="mobileSidebar">
+  <button class="close-btn" id="closeSidebar">&times;</button>
+  <ul>
+    <li><a href="./../index.html">Home</a></li>
+    <li><a href="./../page/workout.html">Workout</a></li>
+    <li><a href="./../page/plan.html">Plan</a></li>
+    <li><a href="./../page/healthy.html">Healthy Living</a></li>
+    <li><a href="./../page/trainer.html">Personal Trainer</a></li>
+    <li><a href="./../page/nutrition.html">Nutrition</a></li>
+  </ul>
+  <a href="#" class="sidebar-btn">Try Us For Free</a>
+</div>
   <!-- Background Video -->
   <div class="video-section">
     <video autoplay muted loop>
@@ -177,5 +195,33 @@
       <p>© 2025 Anytime Fitness. All Rights Reserved.</p>
     </div>
   </footer>
+<script>
+        /* ---------- Sidebar / Hamburger (your original behavior preserved) ---------- */
+        const hamburger = document.getElementById('hamburgerBtn');
+        const sidebar = document.getElementById('mobileSidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        if (hamburger && sidebar) {
+          hamburger.addEventListener('click', () => {
+            sidebar.classList.add('active');
+          });
+        }
+        if (closeSidebar && sidebar) {
+          closeSidebar.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+          });
+        }
+
+        // Close sidebar when clicking a link
+        if (sidebar) {
+          sidebar.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+              // allow links to navigate if they are external pages; but close sidebar anyway
+              sidebar.classList.remove('active');
+            });
+          });
+        }
+      </script>
+
 </body>
 </html>

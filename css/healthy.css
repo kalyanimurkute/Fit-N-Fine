@@ -1,8 +1,17 @@
-body {
+/* Global fix */ 
+* {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #e7e7f3;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  /* removes unwanted horizontal scroll strip */
+}
+
 
 /* NAVIGATION */
 nav {
@@ -10,12 +19,13 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
- background: rgba(72, 3, 147, 0.6);
+  background: rgba(72, 3, 147, 0.6);
   padding: 15px 30px;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 2;
+  z-index: 2000;
   flex-wrap: wrap;
 }
 
@@ -45,28 +55,152 @@ ul.nav-links li a:hover {
   text-decoration: underline;
 }
 
-.btn {
+.button {
   display: inline-block;
+  margin-left: 20px;
   padding: 10px 20px;
-  margin-right: 65px;
   background-color: #fff;
   color: #4c346b;
   text-decoration: none;
   border-radius: 20px;
-  border-color: #fff;
+  border: 1px solid #fff;
   transition: background 0.3s;
 }
 
-.btn:hover {
+.button:hover {
   background-color: #3a2757;
   color: #fff;
   text-decoration-line: underline;
 }
 
+/* === SIDEBAR === */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  /* hidden by default */
+  width: 240px;
+  height: 100%;
+  background: rgba(72, 3, 147, 0.95);
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease-in-out;
+  padding: 20px;
+  z-index: 3000;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 50px;
+}
+
+.sidebar li {
+  margin: 15px 0;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: block;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.sidebar a:hover {
+  background: white;
+  color: #4c346b;
+}
+
+.close-btn {
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #fff;
+}
+
+.sidebar-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #c2a0ee;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 80px;
+  border: 1px solid #fff;
+  transition: background 0.3s;
+}
+
+.sidebar-btn:hover {
+  background: #fff;
+  color: #4c346b;
+}
+
+/* Hamburger (hidden on desktop by default) */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  margin-right: 20px;
+  /* spacing on right side */
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  nav .nav-links {
+    display: none;
+  }
+
+  /* hide desktop links */
+  .button {
+    display: none;
+  }
+
+  /* hide desktop button */
+  .hamburger {
+    display: block;
+  }
+
+  /* show hamburger */
+  nav {
+    padding: 15px 20px;
+  }
+
+  /* smaller padding for mobile */
+}
+
+
+/* Prevent fixed navbar from covering content */
+#mainContent {
+  padding-top: 80px;
+}
+
+/* adjust if your nav height differs */
+@media (max-width: 768px) {
+  #mainContent {
+    padding-top: 64px;
+  }
+}
+
+
 
 /* Hero Section */
 .hero {
-  background-image: url("../images/healthy-1.jpg"); /* Replace with your image */
+  margin: 0;
+  padding: 0;
+  background-image: url("../images/healthy-1.jpg");
+  /* Replace with your image */
   background-size: cover;
   background-position: center;
   height: 450px;
@@ -79,7 +213,7 @@ ul.nav-links li a:hover {
 }
 
 .hero::before {
-  content: "";
+  content: " ";
   position: absolute;
   top: 0;
   left: 0;
@@ -91,7 +225,7 @@ ul.nav-links li a:hover {
 .hero-content {
   position: relative;
   z-index: 1;
-  max-width: 600px;
+  max-width: 90%;
 }
 
 .hero h1 {
@@ -109,7 +243,35 @@ ul.nav-links li a:hover {
 .hero p {
   font-size: 1rem;
 }
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .hero {
+    height: 300px; /* mobile ke liye chhoti height */
+    background-position: top center; /* upar se image dikhegi */
+  }
 
+  .hero h1 {
+    font-size: 24px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 250px; /* chhoti screen par aur adjust */
+  }
+
+  .hero h1 {
+    font-size: 20px;
+  }
+
+  .hero p {
+    font-size: 12px;
+  }
+}
 /* Fitness Section */
 .section {
   padding: 40px 20px;
@@ -131,8 +293,8 @@ ul.nav-links li a:hover {
   text-align: center;
   font-size: 35px;
   font-weight: bold;
-  color:  #4c346b;
-  margin-top: 10px;
+  color: #4c346b;
+  margin-bottom: 25px;
 }
 
 .section-2 h2 {
@@ -140,7 +302,7 @@ ul.nav-links li a:hover {
   font-size: 35px;
   font-weight: bold;
   color: #4c346b;
-  margin-top: 10px;
+  margin-bottom: 25px;
 }
 
 
@@ -148,8 +310,8 @@ ul.nav-links li a:hover {
   text-align: center;
   font-size: 35px;
   font-weight: bold;
-  color:  #4c346b;
-  margin-top: 10px;
+  color: #4c346b;
+  margin-bottom: 25px;
 }
 
 .cards {
@@ -199,32 +361,34 @@ ul.nav-links li a:hover {
   font-size: 0.875rem;
   color: #333;
 }
+
 .get-started {
-      margin-top: 30px;
-      text-align: center;
-    }
+  margin-top: 30px;
+  text-align: center;
+}
 
-    .get-started button {
-      background: #4c0070;
-      border: none;
-      padding: 12px 30px;
-      font-size: 1rem;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+.get-started button {
+  background: #4c0070;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-    .get-started button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(97, 2, 93, 0.4);
-    }
+.get-started button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(97, 2, 93, 0.4);
+}
 
-    .get-started button a {
-      text-decoration: none;
-      color: #fff;
-      font-weight: bold;
-    }
-     /* Footer Section */
+.get-started button a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Footer Section */
 .footer {
   background: linear-gradient(135deg, #4c0a91, #8e3ccf);
   color: #fff;

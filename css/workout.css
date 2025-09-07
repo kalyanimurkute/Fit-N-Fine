@@ -1,16 +1,31 @@
+/* Global fix */ 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  /* removes unwanted horizontal scroll strip */
+}
+
+
 /* NAVIGATION */
 nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
- background: rgba(72, 3, 147, 0.6);
+  background: rgba(72, 3, 147, 0.6);
   padding: 15px 30px;
-  margin: 0%;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 2;
+  z-index: 2000;
   flex-wrap: wrap;
 }
 
@@ -40,22 +55,142 @@ ul.nav-links li a:hover {
   text-decoration: underline;
 }
 
-.btn-2 {
+.button {
   display: inline-block;
-  margin-right: 65px;
+  margin-left: 20px;
   padding: 10px 20px;
   background-color: #fff;
   color: #4c346b;
   text-decoration: none;
   border-radius: 20px;
-  border-color: #fff;
+  border: 1px solid #fff;
   transition: background 0.3s;
 }
 
-.btn-2:hover {
+.button:hover {
   background-color: #3a2757;
   color: #fff;
   text-decoration-line: underline;
+}
+
+/* === SIDEBAR === */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  /* hidden by default */
+  width: 240px;
+  height: 100%;
+  background: rgba(72, 3, 147, 0.95);
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease-in-out;
+  padding: 20px;
+  z-index: 3000;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 50px;
+}
+
+.sidebar li {
+  margin: 15px 0;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: block;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.sidebar a:hover {
+  background: white;
+  color: #4c346b;
+}
+
+.close-btn {
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #fff;
+}
+
+.sidebar-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #c2a0ee;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 80px;
+  border: 1px solid #fff;
+  transition: background 0.3s;
+}
+
+.sidebar-btn:hover {
+  background: #fff;
+  color: #4c346b;
+}
+
+/* Hamburger (hidden on desktop by default) */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  margin-right: 20px;
+  /* spacing on right side */
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  nav .nav-links {
+    display: none;
+  }
+
+  /* hide desktop links */
+  .button {
+    display: none;
+  }
+
+  /* hide desktop button */
+  .hamburger {
+    display: block;
+  }
+
+  /* show hamburger */
+  nav {
+    padding: 15px 20px;
+  }
+
+  /* smaller padding for mobile */
+}
+
+
+/* Prevent fixed navbar from covering content */
+#mainContent {
+  padding-top: 80px;
+}
+
+/* adjust if your nav height differs */
+@media (max-width: 768px) {
+  #mainContent {
+    padding-top: 64px;
+  }
 }
 
 /* Background video section */
@@ -99,6 +234,17 @@ ul.nav-links li a:hover {
   z-index: 10;
 }
 
+/* Keep heading above the video */
+.video-heading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.2);
+  z-index: 2;
+  /* above video */
+  /* keep your existing animation/typography here */
+}
+
 /* Animation keyframes */
 @keyframes slideZoomIn {
   0% {
@@ -122,7 +268,23 @@ ul.nav-links li a:hover {
     transform: translate(-50%, -50%) scale(0.8);
   }
 }
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .video-section {
+    height: 350px; /* smaller height for mobile */
+  }
 
+  .video-section video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* keeps video proportional */
+  }
+
+  .video-heading {
+    font-size: 14px;  /* smaller text for mobile */
+    padding: 10px 15px;
+  }
+}
 .btn {
   margin-top: auto;
   margin-bottom: 20px;
@@ -153,9 +315,10 @@ ul.nav-links li a:hover {
 .page-title {
 
   font-size: 40px;
-  color:  #4c346b;
+  color: #4c346b;
   text-align: center;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .card-container {
@@ -188,7 +351,7 @@ ul.nav-links li a:hover {
 }
 
 .card-1 h2 {
-  margin-top: 15px;
+  margin-top: 10px;
   font-size: 20px;
   color: #4c346b;
   text-align: center;
@@ -229,15 +392,15 @@ ul.nav-links li a:hover {
   margin-top: 30px;
   text-align: center;
   padding: 20px;
-   background: linear-gradient(to right, #4a2a7c, #301654);
+  background: linear-gradient(to right, #4a2a7c, #301654);
 }
 
 
 .section h2 {
   font-size: 35px;
   font-weight: bold;
-  color:  #ddcbf5;
-  margin-top: 10px;
+  color: #ddcbf5;
+  margin-bottom: 20px;
 }
 
 .features {
@@ -258,7 +421,7 @@ ul.nav-links li a:hover {
   background: linear-gradient(to right, #4a2a7c, #301654);
   border-radius: 12px;
   border: 1px solid #a58ee9;
- box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -285,7 +448,8 @@ ul.nav-links li a:hover {
   color: white;
   line-height: 1.6;
 }
- /* Footer Section */
+
+/* Footer Section */
 .footer {
   background: linear-gradient(135deg, #4c0a91, #8e3ccf);
   color: #fff;
@@ -417,5 +581,3 @@ ul.nav-links li a:hover {
   padding-top: 15px;
   font-size: 14px;
 }
-
-
